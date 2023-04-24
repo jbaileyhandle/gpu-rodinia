@@ -2,15 +2,49 @@ include common/make.config
 
 RODINIA_BASE_DIR := $(shell pwd)
 
+#================================================
+HIP_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/hip
+#================================================
+
 CUDA_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/cuda
 OMP_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/omp
 OPENCL_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/opencl
 
+#================================================
+HIP_DIRS := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder mummergpu
+#================================================
 CUDA_DIRS := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder mummergpu
 OMP_DIRS  := backprop bfs cfd		   heartwall hotspot kmeans lavaMD leukocyte lud nn nw srad streamcluster particlefilter pathfinder mummergpu
 OCL_DIRS  := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder
 
-all: CUDA OMP OPENCL
+#================================================
+all: HIP CUDA OMP OPENCL
+#================================================
+
+#================================================
+HIP: 
+	mkdir -p $(HIP_BIN_DIR)
+	cd hip/backprop;		make;	cp backprop $(HIP_BIN_DIR)
+	#cd hip/bfs;			make;	cp bfs $(HIP_BIN_DIR)
+	#cd hip/cfd;			make;	cp euler3d euler3d_double pre_euler3d pre_euler3d_double $(HIP_BIN_DIR)
+	#cd hip/gaussian;		make;	cp gaussian $(HIP_BIN_DIR)
+	#cd hip/heartwall;		make;	cp heartwall $(HIP_BIN_DIR)
+	#cd hip/hotspot;		make;	cp hotspot $(HIP_BIN_DIR)
+	#cd hip/kmeans;			make;	cp kmeans $(HIP_BIN_DIR)
+	#cd hip/lavaMD;			make;	cp lavaMD $(HIP_BIN_DIR)
+	#cd hip/leukocyte;		make;	cp HIP/leukocyte $(HIP_BIN_DIR)
+	#cd hip/lud;			make;	cp hip/lud_hip $(HIP_BIN_DIR)
+	#cd hip/nn;				make;	cp nn $(HIP_BIN_DIR)
+	#cd hip/nw;			make;	cp needle $(HIP_BIN_DIR)
+	#cd hip/srad/srad_v1;		make;	cp srad $(HIP_BIN_DIR)/srad_v1
+	#cd hip/srad/srad_v2;		make;   cp srad $(HIP_BIN_DIR)/srad_v2
+	#cd hip/streamcluster;		make;	cp sc_gpu $(HIP_BIN_DIR)
+	#cd hip/particlefilter;		make;	cp particlefilter_naive particlefilter_float $(HIP_BIN_DIR)       
+	#cd hip/pathfinder;		make;	cp pathfinder $(HIP_BIN_DIR)
+	#cd hip/mummergpu;		make;	cp bin/mummergpu $(HIP_BIN_DIR)
+	#cd hip/hybridsort;              make;   cp hybridsort $(HIP_BIN_DIR)
+	#cd hip/dwt2d;                   make;   cp dwt2d  $(HIP_BIN_DIR)
+#================================================
 
 CUDA: 
 	cd cuda/backprop;		make;	cp backprop $(CUDA_BIN_DIR)

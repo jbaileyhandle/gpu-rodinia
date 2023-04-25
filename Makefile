@@ -25,7 +25,7 @@ all: HIP CUDA OMP OPENCL
 HIP: 
 	mkdir -p $(HIP_BIN_DIR)
 	cd hip/backprop;		make;	cp backprop $(HIP_BIN_DIR)
-	#cd hip/bfs;			make;	cp bfs $(HIP_BIN_DIR)
+	cd hip/bfs;			make;	cp bfs $(HIP_BIN_DIR)
 	#cd hip/cfd;			make;	cp euler3d euler3d_double pre_euler3d pre_euler3d_double $(HIP_BIN_DIR)
 	#cd hip/gaussian;		make;	cp gaussian $(HIP_BIN_DIR)
 	#cd hip/heartwall;		make;	cp heartwall $(HIP_BIN_DIR)
